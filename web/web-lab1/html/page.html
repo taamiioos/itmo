@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>LabWork</title>
+    <meta name="author" content="Татьяна Митина"/>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="shortcut icon" href="../ico/animal.ico" type="image/x-icon"/>
+    <style>
+        .buttons {
+            display: block;
+            margin-top: 10px;
+        }
+
+        .buttons button {
+            margin-left: 18px;
+            padding: 8px 16px;
+            background-color: #744b05;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #744B0560;
+        }
+
+        button:active {
+            background-color: #744405;
+        }
+
+        .description {
+            text-align: center;
+            background-color: #e1d9ce;
+            padding: 10px;
+            font-family: fantasy;
+        }
+
+        body {
+            background-color: #cab08f;
+            font-family: Arial, sans-serif;
+            margin-top: 20px;
+        }
+
+        table {
+            max-height: 500px;
+            overflow-y: auto;
+            float: right;
+            width: 45%;
+            margin-top: 70px;
+            margin-right: 50px;
+            padding: 5px;
+            border-radius: 10px;
+            background-color: #886750;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .window {
+            text-align: center;
+            float: left;
+            width: 45%;
+            height: 50%;
+            margin-top: 70px;
+            margin-left: 40px;
+            background-color: #886750;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .inputFields {
+            display: flex;
+            flex-direction: column;
+            margin-top: 10px;
+        }
+
+        .inputFields input {
+            margin-right: 2px;
+            background-color: rgba(225, 217, 206, 0.5);
+            border-radius: 5px;
+            border: none;
+            padding: 3px 7px;
+            margin-top: 10px;
+        }
+
+        .inputFields label {
+            margin-right: 4px;
+        }
+    </style>
+</head>
+<body>
+<div class="description">
+    by Mitina Tatiana Olegovna | group: P3221 | variant: 3117
+</div>
+
+<div class="window">
+    <svg width="400" height="400">
+        <line x1="0" y1="200" x2="400" y2="200" stroke="black" stroke-width="2"/>
+        <line x1="200" y1="0" x2="200" y2="400" stroke="black" stroke-width="2"/>
+
+        <polygon points="400,200 390,195 390,205" fill="black"/>
+        <polygon points="200,0 195,10 205,10" fill="black"/>
+
+        <line x1="50" y1="195" x2="50" y2="205" stroke="black" stroke-width="2"/>
+        <line x1="150" y1="195" x2="150" y2="205" stroke="black" stroke-width="2"/>
+        <line x1="250" y1="195" x2="250" y2="205" stroke="black" stroke-width="2"/>
+        <line x1="350" y1="195" x2="350" y2="205" stroke="black" stroke-width="2"/>
+        <line x1="450" y1="195" x2="450" y2="205" stroke="black" stroke-width="2"/>
+
+        <text x="45" y="220" font-size="12">-R</text>
+        <text x="145" y="220" font-size="12">-R/2</text>
+        <text x="245" y="220" font-size="12">R/2</text>
+        <text x="345" y="220" font-size="12">R</text>
+        <line x1="195" y1="50" x2="205" y2="50" stroke="black" stroke-width="2"/>
+        <line x1="195" y1="150" x2="205" y2="150" stroke="black" stroke-width="2"/>
+        <line x1="195" y1="250" x2="205" y2="250" stroke="black" stroke-width="2"/>
+        <line x1="195" y1="350" x2="205" y2="350" stroke="black" stroke-width="2"/>
+        <line x1="195" y1="450" x2="205" y2="450" stroke="black" stroke-width="2"/>
+
+        <text x="180" y="55" font-size="12">R</text>
+        <text x="180" y="155" font-size="12">R/2</text>
+        <text x="180" y="255" font-size="12">-R/2</text>
+        <text x="180" y="355" font-size="12">-R</text>
+
+        <path d="M200,150 A50,50 0 0,1 250,200 L200,200 Z" fill="rgba(225, 217, 206, 0.5)" stroke="black"
+              stroke-width="2"/>
+        <polygon points="200,150 200,200 50,200" fill="rgba(225, 217, 206, 0.5)" stroke="black"
+                 stroke-width="2"></polygon>
+        <polygon points="50,200 200,200 200,250 50,250" fill="rgba(225, 217, 206, 0.5)" stroke="black"
+                 stroke-width="2"></polygon>
+    </svg>
+
+    <div class="inputFields">
+        <div class="xCheckbox">
+            <label>X:</label>
+            <input type="checkbox" id="-4" name="x" value="-2">
+            <label for="-4">-4</label>
+
+            <input type="checkbox" id="-3" name="x" value="-3">
+            <label for="-3">-3</label>
+
+            <input type="checkbox" id="-2" name="x" value="-2">
+            <label for="-2">-2</label>
+
+            <input type="checkbox" id="-1" name="x" value="-1">
+            <label for="-1">-1</label>
+
+            <input type="checkbox" id="0" name="x" value="0">
+            <label for="0">0</label>
+
+            <input type="checkbox" id="1" name="x" value="1">
+            <label for="1">1</label>
+
+            <input type="checkbox" id="2" name="x" value="2">
+            <label for="2">2</label>
+
+            <input type="checkbox" id="3" name="x" value="3">
+            <label for="3">3</label>
+
+            <input type="checkbox" id="4" name="x" value="4">
+            <label for="4">4</label>
+        </div>
+
+        <div class="yInput">
+            <label for="y">Y:</label>
+            <input style="width: 40px" type="number" id="y" name="y" min="-3" max="5" step="0.5" placeholder="-5..3">
+        </div>
+
+        <div class="rInput">
+            <label for="r">R:</label>
+            <input style="width: 40px" type="number" id="r" name="y" min="1" max="4" step="0.5" placeholder="1..4">
+        </div>
+    </div>
+
+    <div id="alerts"></div>
+    <div class="buttons">
+        <button type="button" id="sendButton">Send</button>
+        <button type="button" id="resetButton">Reset</button>
+    </div>
+</div>
+
+<table id='table'>
+    <thead>
+    <tr>
+        <th>X</th>
+        <th>Y</th>
+        <th>R</th>
+        <th>Results</th>
+        <th>Script time(seconds)</th>
+        <th>Time</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+
+</body>
+<script src="../js/buttonHandler.js"></script>
+<script src="../js/validator.js"></script>
+<script src="../js/table.js"></script>
+</html>
