@@ -1,0 +1,34 @@
+.description {
+    text-align: center;
+    background-color: #d8c8bc;
+    padding: 5px;
+    font-family: Lato, Montserrat, sans-serif;
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+/* Десктопный режим */
+@media (min-width: 1255px) {
+    .description {
+        padding: 15px;
+        font-size: 15px;
+        margin-bottom: 20px;
+    }
+}
+
+/* Планшетный режим */
+@media (min-width: 814px) and (max-width: 1254px) {
+    .description {
+        padding: 15px;
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+}
+
+/* Мобильный режим */
+@media (max-width: 814px) {
+    .description {
+        padding: 10px;
+        font-size: 15px;
+        margin-bottom: 25px;
+    }
+}
