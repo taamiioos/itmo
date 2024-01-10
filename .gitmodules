@@ -1,0 +1,3 @@
+[submodule "web/web-lab3"]
+	path = web/web-lab3
+	url = git@github.com:taamiioos/web-lab3.git
