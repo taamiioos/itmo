@@ -1,0 +1,16 @@
+table {
+    max-height: 500px;
+    overflow-y: auto;
+    float: right;
+    width: 45%;
+    margin-top: 70px;
+    margin-right: 50px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #886750;
+}
+th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+}

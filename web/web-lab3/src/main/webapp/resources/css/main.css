@@ -1,0 +1,119 @@
+body {
+    background-color: #cab08f;
+    font-family: Lato, Montserrat, sans-serif;
+    margin-top: 20px;
+    font-size: 20px;
+}
+.window {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border: 2px solid #744b05;
+    text-align: center;
+    float: left;
+    width: 800px;
+    height: 800px;
+    margin-top: 70px;
+    margin-left: 40px;
+    background-color: #886750;
+    padding: 10px;
+    border-radius: 10px;
+}
+#coordinatePanel {
+    margin-top: 10px;
+    margin-left: 180px;
+}
+.button-container button {
+    font-family: Lato, Montserrat, sans-serif;
+    display: inline-block;
+    margin-top: 20px;
+    margin-left: 10px;
+    padding: 10px 20px;
+    background-color: #6c5443;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.pTable {
+    max-height: 800px;
+    overflow-y: auto;
+    float: right;
+    width: 45%;
+    margin-top: 70px;
+    margin-right: 50px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #886750;
+}
+#pointsTable {
+    color: #cccccc;
+    background-color: #886750;
+    font-family: Lato, Montserrat, sans-serif;}
+
+#pointsTable th {
+    text-align: center;
+    background-color: #886750;
+    color: #cccccc;
+}
+
+#pointsTable tr {
+    color: #cccccc;
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 8px;
+    background-color: #886750;
+}
+.back .back-button {
+    font-size: 20px;
+    font-family: Lato, Montserrat, sans-serif;
+    padding: 10px 20px;
+    background-color: #6c5443;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+.inputFields {
+    font-size: 25px;
+    font-family: Lato, Montserrat, sans-serif;
+    display: flex;
+    flex-direction: column;
+    margin-top: 460px;
+}
+.select {
+    margin-top: 12px;
+    margin-left: 30px;
+    display: flex;
+    align-items: center;
+}
+.select .slct{
+    margin-right: 10px;
+    width: 100px;
+    background-color: #d8c8bc;
+    color: #333;
+}
+.input{
+    border-radius: 10px;
+    margin-left: 30px;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;}
+
+.input .inpt{
+    font-size: 15px;
+    margin-right: 10px;
+    width: 60px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #d8c8bc;
+}
+
+
+.err-mess {
+    margin-top: 10px ;
+}

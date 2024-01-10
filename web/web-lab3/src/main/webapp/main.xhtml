@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <title>Main page</title>
+    <meta charset="UTF-8"/>
+    <h:outputStylesheet name="css/main.css"/>
+</h:head>
+<h:body>
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{pointBean.updatePoints}"/>
+    </f:metadata>
+
+
+    <h:form id="mainForm">
+        <div class="window">
+            <p:outputPanel id="coordinatePanelWrapper"
+                           style="position: relative; margin-top: 10px; margin-left: 180px;">
+                <p:outputPanel id="coordinatePanel" style="position: absolute; width: 400px; height: 400px;">
+                    <svg width="400" height="400" onclick="drawPoint(event)">
+                        <line x1="0" y1="200" x2="400" y2="200" style="stroke: black; stroke-width: 2"/>
+                        <line x1="200" y1="0" x2="200" y2="400" style="stroke: black; stroke-width: 2"/>
+                        <polygon points="400,200 390,195 390,205" style="fill: black"/>
+                        <polygon points="200,0 195,10 205,10" style="fill: black"/>
+                        <line x1="80" y1="195" x2="80" y2="205" style="stroke: black; stroke-width: 2"/>
+                        <line x1="140" y1="195" x2="140" y2="205" style="stroke: black; stroke-width: 2"/>
+                        <line x1="260" y1="195" x2="260" y2="205" style="stroke: black; stroke-width: 2"/>
+                        <line x1="320" y1="195" x2="320" y2="205" style="stroke: black; stroke-width: 2"/>
+                        <text id="Rx" x="75" y="220" font-size="12">-R</text>
+                        <text id="R/2x" x="135" y="220" font-size="12">-R/2</text>
+                        <text id="-R/2x" x="255" y="220" font-size="12">R/2</text>
+                        <text id="-Rx" x="315" y="220" font-size="12">R</text>
+                        <line x1="195" y1="80" x2="205" y2="80" style="stroke: black; stroke-width: 2"/>
+                        <line x1="195" y1="140" x2="205" y2="140" style="stroke: black; stroke-width: 2"/>
+                        <line x1="195" y1="260" x2="205" y2="260" style="stroke: black; stroke-width: 2"/>
+                        <line x1="195" y1="320" x2="205" y2="320" style="stroke: black; stroke-width: 2"/>
+                        <text id="Ry" x="180" y="85" font-size="12">R</text>
+                        <text id="R/2y" x="180" y="145" font-size="12">R/2</text>
+                        <text id="-R/2y" x="180" y="265" font-size="12">-R/2</text>
+                        <text id="-Ry" x="180" y="325" font-size="12">-R</text>
+                        <path d="M200,200 L200,80 A140,140 0 0,1 320,200 Z"
+                              style="fill: rgba(225, 217, 206, 0.5); stroke: black; stroke-width: 2"/>
+                        <polygon points="260,200 200,200 200,260"
+                                 style="fill: rgba(225, 217, 206, 0.5); stroke: black; stroke-width: 2"/>
+                        <polygon points="80,200 200,200 200,260 80,260"
+                                 style="fill: rgba(225, 217, 206, 0.5); stroke: black; stroke-width: 2"/>
+                    </svg>
+                </p:outputPanel>
+            </p:outputPanel>
+
+            <div class="inputFields">
+                <div class="select">
+                    <h:outputLabel value="X:  "/>
+                    <p:selectOneMenu id="xSelect" value="#{pointBean.x}" styleClass="slct">
+                        <f:selectItem itemValue="-5" itemLabel="-5"/>
+                        <f:selectItem itemValue="-4" itemLabel="-4"/>
+                        <f:selectItem itemValue="-3" itemLabel="-3"/>
+                        <f:selectItem itemValue="-2" itemLabel="-2"/>
+                        <f:selectItem itemValue="-1" itemLabel="-1"/>
+                        <f:selectItem itemValue="0" itemLabel="0"/>
+                        <f:selectItem itemValue="1" itemLabel="1"/>
+                    </p:selectOneMenu>
+                </div>
+                <div class="input">
+                    <h:outputLabel value="Y: ">
+                        <h:inputText id="y" maxlength="4" value="#{pointBean.y}" styleClass="inpt">
+                            <f:validateDoubleRange minimum="-3" maximum="3"/>
+                            <p:message for="y"/>
+                        </h:inputText>
+                        <p:watermark for="y" value="Введите значение от -3 до 3"/>
+                    </h:outputLabel>
+                </div>
+                <div class="select">
+                    <h:outputLabel value="R: "/>
+                    <p:selectOneMenu id="rSelect" widgetVar="rVar" value="#{pointBean.r}" styleClass="slct"
+                                     onchange="changeR()">
+                        <f:selectItem itemValue="1" itemLabel="1"/>
+                        <f:selectItem itemValue="1.5" itemLabel="1.5"/>
+                        <f:selectItem itemValue="2" itemLabel="2"/>
+                        <f:selectItem itemValue="2.5" itemLabel="2.5"/>
+                        <f:selectItem itemValue="3" itemLabel="3"/>
+                    </p:selectOneMenu>
+                </div>
+                <div class="err-mess">
+                    <p:message for="y" styleClass="error-message" showSummary="true" showDetail="false"
+                               style="color: #462904; background-color: #cab08f; border-radius: 5px;"/>
+                </div>
+            </div>
+            <div class="button-container">
+                <p:commandButton value="Submit" action="#{pointBean.savePoint()}" ajax="false"/>
+                <p:commandButton value="Reset" action="#{pointBean.deletePoints}" process="@this" update="coordinatePanel pointsTable" onstart="clearSVG(); points=[]" oncomplete="changeR()"/>
+            </div>
+        </div>
+    </h:form>
+    <div class="pTable">
+        <p:dataTable id="pointsTable" var="check" value="#{pointBean.currentPoints}">
+            <p:column headerText="X">
+                <h:outputText value="#{check.x}"/>
+            </p:column>
+            <p:column headerText="Y">
+                <h:outputText value="#{check.y}"/>
+            </p:column>
+            <p:column headerText="R">
+                <h:outputText value="#{check.r}"/>
+            </p:column>
+            <p:column headerText="Result">
+                <h:outputText value="#{check.result}"/>
+            </p:column>
+            <p:column headerText="Time">
+                <h:outputText value="#{check.checkDate}"/>
+            </p:column>
+        </p:dataTable>
+    </div>
+    <div class="back">
+        <h:button value="Back" outcome="toIndex" styleClass="back-button"/>
+    </div>
+</h:body>
+<p:remoteCommand name="send" action="#{pointBean.sendJsPoint}" update="pointsTable"/>
+<script type="text/javascript">
+    let flag
+    let data = '#{pointBean.receiveJsonPoints()}';
+    let points = JSON.parse(data);
+    let rSelect = document.getElementById("mainForm:rSelect_input");
+    let yInput = document.getElementById("mainForm:y");
+    alerts = document.getElementById('alerts');
+    window.onload = function () {
+        changeCorrectY();
+        changeR();
+        getPoint();
+    };
+
+    function changeCorrectY() {
+        let y = yInput.value;
+        if (y > 3.00) {
+            yInput.value = 3.00;
+        } else if (y &lt; -3.00) {
+            yInput.value = -3.00;
+        }
+    }
+
+    function getPoint() {
+        clearSVG();
+        points.forEach(point => {
+            const {x, y, r} = point;
+            calculator(x, y, r);
+        });
+    }
+
+    function calculator(x, y, r) {
+        const svg = document.querySelector('svg');
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        const width = 400;
+        const height = 400;
+        const centerX = width / 2;
+        const centerY = height / 2;
+        const cx = centerX + x * (width / (3.3 * r));
+        const cy = centerY - y * (height / (3.3 * r));
+        check(x, y, r);
+        setRound(circle, cx, cy, r, flag);
+        svg.appendChild(circle);
+    }
+
+    function clearSVG() {
+        const svg = document.querySelector('svg');
+        const circles = svg.querySelectorAll("circle");
+        circles.forEach(circle => {
+            svg.removeChild(circle);
+        });
+    }
+
+    function check(x, y, r) {
+        if ((x >= 0 &amp;&amp; y &lt;= 0 &amp;&amp; x &lt;= r / 2 &amp;&amp; y >= -r / 2) ||
+            (x &lt;= 0 &amp;&amp; y &lt;= 0 &amp;&amp; x >= -r &amp;&amp; y >= -r / 2) ||
+            (x >= 0 &amp;&amp; y >= 0 &amp;&amp; x &lt;= r &amp;&amp; y &lt;= r &amp;&amp; (Math.pow(x, 2) + Math.pow(y, 2) &lt;= Math.pow(r, 2)))) {
+            flag = "true";
+        } else {
+            flag = "false";
+        }
+    }
+
+    function setRound(circle, cx, cy, r, flag) {
+        circle.setAttribute("cx", cx);
+        circle.setAttribute("cy", cy);
+        circle.setAttribute("r", '5');
+        if (flag === "true") {
+            circle.setAttribute("fill", "beige");
+        } else {
+            circle.setAttribute("fill", "black");
+        }
+    }
+
+    function getXY(svg, event) {
+        const rect = svg.getBoundingClientRect();
+        return {x: event.clientX - rect.left, y: event.clientY - rect.top};
+    }
+
+    function changeR() {
+        let r = rSelect.value;
+        console.log(r)
+        const elements = {
+            "Ry": r,
+            "R/2y": r / 2,
+            "-R/2y": -r / 2,
+            "-Ry": -r,
+            "Rx": -r,
+            "R/2x": -r / 2,
+            "-R/2x": r / 2,
+            "-Rx": r
+        };
+        for (const id in elements) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.textContent = elements[id] ? elements[id].toString() : "";
+            }
+        }
+    }
+
+
+    function drawPoint(event) {
+        let r = rSelect.value;
+        const svgDraw = document.querySelector('svg');
+        const point = getXY(svgDraw, event);
+        const tempX = point.x - 200;
+        const tempY = 200 - point.y;
+        const temp = 120 / r;
+        const newX = (tempX / temp).toFixed(1);
+        const newY = (tempY / temp).toFixed(1);
+        sendPoints(newX, newY, r);
+        calculator(newX,newY,r);
+    }
+    function sendPoints(x, y, r) {
+        send([{name: "x", value: x}, {name: "y", value: y}, {name: "r", value: r}]);
+        check(x, y, r);
+        points.push({x, y, r, flag})
+        getPoint();
+    }
+</script>
+</html>

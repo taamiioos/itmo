@@ -1,0 +1,35 @@
+.mainButtons, .chooseButtons {
+    display: block;
+    margin-top: 10px;
+}
+.chooseButtons button.active {
+    background-color: #d8c8bc;
+}
+.mainButtons button {
+    margin-left: 18px;
+    padding: 8px 16px;
+    background-color: #744b05;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.mainButtons button:hover {
+    background-color: #744B0560;
+}
+
+.mainButtons button:active {
+    background-color: #744405;
+}
+.chooseButtons button{
+    margin-left: 6px;
+    padding: 8px 8px;
+    background-color: #a47b5a;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.chooseButtons button:hover {
+    background-color: #d8c8bc;
+}
